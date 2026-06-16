@@ -7,6 +7,7 @@ const readline = require('readline');
 
 const ROOT = path.resolve(__dirname, '..');
 const TEMPLATE_DIR = path.join(ROOT, 'templates');
+const PACKAGE = require(path.join(ROOT, 'package.json'));
 const MODES = new Set(['claude', 'codex', 'dual']);
 const MODE_TO_TEMPLATE = {
   claude: 'claude-only',
@@ -21,6 +22,7 @@ Usage:
   create-claudex --mode <claude|codex|dual> [--target <dir>] [--yes]
   create-claudex init --mode <claude|codex|dual> [--target <dir>] [--yes]
   create-claudex check [--mode <claude|codex|dual>] [--target <dir>]
+  create-claudex --version
 
 Examples:
   npm create claudex -- --mode dual
@@ -31,12 +33,14 @@ Examples:
 
 function parseArgs(argv) {
   const firstArg = argv[2];
-  const hasExplicitCommand = firstArg && !firstArg.startsWith('-');
-  const args = { command: hasExplicitCommand ? firstArg : 'init', mode: null, target: process.cwd(), yes: false, help: false };
+  const hasExplicitCommand = Boolean(firstArg && !firstArg.startsWith('-'));
+  const args = { command: firstArg ? (hasExplicitCommand ? firstArg : 'init') : null, mode: null, target: process.cwd(), yes: false, version: false, help: false };
   for (let i = hasExplicitCommand ? 3 : 2; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
       args.help = true;
+    } else if (arg === '--version' || arg === '-v') {
+      args.version = true;
     } else if (arg === '--yes' || arg === '-y') {
       args.yes = true;
     } else if (arg === '--mode') {
@@ -168,6 +172,11 @@ function printCheckResults(results, target) {
 
 async function run() {
   const args = parseArgs(process.argv);
+  if (args.version) {
+    console.log(PACKAGE.version);
+    return 0;
+  }
+
   if (args.help || !args.command) {
     console.log(usage());
     return 0;

@@ -22,6 +22,21 @@ function runCli(args, options = {}) {
   });
 }
 
+test('prints usage when no arguments are provided', () => {
+  const result = runCli([]);
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /Usage:/);
+});
+
+test('prints package version', () => {
+  const packageJson = require('../package.json');
+  const result = runCli(['--version']);
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.equal(result.stdout.trim(), packageJson.version);
+});
+
 test('init claude installs Claude files only', () => {
   const target = tempProject();
   const result = runCli(['init', '--mode', 'claude', '--target', target, '--yes']);

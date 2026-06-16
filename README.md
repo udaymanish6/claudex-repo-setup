@@ -174,6 +174,12 @@ jq empty templates/dual/.codex/hooks.json
 git status --short
 ```
 
+## Credits
+
+Claudex Setup builds on Claude Code memory-bank ideas from George Liu / Centmin Mod's MIT-licensed [centminmod/my-claude-code-setup](https://github.com/centminmod/my-claude-code-setup), especially the `CLAUDE.md` memory-bank workflow, Template 3 progressive-disclosure direction, companion `.claude/rules/` pattern, and `/init`-driven project memory population.
+
+This project repackages and narrows that work into a dependency-free npm initializer with Claude-only, Codex-only, and dual-agent modes, plus the shared `AGENT-*.md` memory-bank contract for projects that use both agents.
+
 ## Maintenance Rules
 
 - Keep the repo root as template documentation, not a live project setup.
