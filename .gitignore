@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# npm/package artifacts
+*.tgz
+npm-debug.log*
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Generated project memory
+AGENT-*.md
+memory/
+.codex-home/
+
+# Local smoke-test output
+Claudex-Smoke-Test-*/
