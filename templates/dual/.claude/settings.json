@@ -1,0 +1,58 @@
+{
+  "cleanupPeriodDays": 365,
+  "model": "sonnet",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Evaluate whether Claude may stop this turn.\n\nProject memory policy:\n- If the turn involved meaningful project work, file edits, config changes, debugging, verification, design decisions, or setup analysis, Claude must update or explicitly review the memory bank before stopping.\n- Required final marker after meaningful work: `Memory status: updated ...` or `Memory status: no durable memory changes needed`.\n- Memory bank files are generated in the target project after `/init` or `/update-memory-bank`: `AGENT-activeContext.md`, `AGENT-patterns.md`, `AGENT-decisions.md`, `AGENT-troubleshooting.md`, `AGENT-config-variables.md`. If they are missing, Claude must create them from actual project evidence before claiming memory is updated.\n- Concise mirrors live in repo-local `memory/`; if missing, Claude must set `.claude/settings.json` `autoMemoryDirectory` to this project's absolute `memory/` path during memory initialization.\n\nAllow stopping if:\n1. The turn was only a brief clarification/question/status with no meaningful durable project work, OR\n2. The last assistant message includes a valid `Memory status:` marker.\n\nBlock stopping if meaningful work happened and the marker is missing. In that case, tell Claude to read/update the relevant AGENT-*.md files, mirror concise facts into memory/ if needed, and then finish with a Memory status marker.\n\nHook input: $ARGUMENTS",
+            "model": "haiku",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/unified_notifier.py",
+              "Stop"
+            ]
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/memory_guard.py",
+              "SessionStart"
+            ],
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/memory_guard.py",
+              "PreCompact"
+            ],
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "autoMemoryEnabled": true
+}

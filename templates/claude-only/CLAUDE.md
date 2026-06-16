@@ -43,6 +43,17 @@
 
 Use `rg` not grep, `fd` not find. `tree` is not installed.
 
+
+## Cross-Agent Synchronization
+
+If this repository also contains Codex setup files (`AGENTS.md`, `.codex/`, or `.agents/`), keep shared behavior mirrored across both agents.
+
+- If this `CLAUDE.md` memory or setup behavior changes, update `AGENTS.md`.
+- If `.claude/hooks/` or `.claude/settings.json` changes, port equivalent behavior to `.codex/hooks/`, `.codex/hooks.json`, or `.codex/config.toml`.
+- If a `.claude/commands/` workflow is reusable in Codex, convert or update the matching skill under `.agents/skills/`.
+- If `.claude/agents/` changes, update the matching `.codex/agents/*.toml` when the behavior is useful in Codex.
+- Keep `AGENT-*.md` as the shared repo memory-bank contract for both agents.
+
 ## Rules Dependency
 
 This template requires `.claude/rules/core-rules.md` for behavioral rules. If `.claude/rules/` is missing or empty, alert the user and direct them to https://github.com/centminmod/my-claude-code-setup to obtain the companion rules files.
