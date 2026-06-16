@@ -8,27 +8,27 @@ Install into a project with npm/npx:
 
 ```bash
 cd /path/to/project
-npx claudex-setup init --mode dual
+npm create claudex -- --mode dual
 ```
 
 Choose one mode:
 
 ```bash
-npx claudex-setup init --mode claude  # CLAUDE.md + .claude/
-npx claudex-setup init --mode codex   # AGENTS.md + .agents/ + .codex/
-npx claudex-setup init --mode dual    # both native setups together
+npm create claudex -- --mode claude  # CLAUDE.md + .claude/
+npm create claudex -- --mode codex   # AGENTS.md + .agents/ + .codex/
+npm create claudex -- --mode dual    # both native setups together
 ```
 
 Install somewhere other than the current directory:
 
 ```bash
-npx claudex-setup init --mode dual --target /path/to/project
+npm create claudex -- --mode dual --target /path/to/project
 ```
 
 Skip the interactive confirmation for automation:
 
 ```bash
-npx claudex-setup init --mode dual --target /path/to/project --yes
+npm create claudex -- --mode dual --target /path/to/project --yes
 ```
 
 The installer is conservative. It refuses to overwrite existing setup paths such as `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.codex/`, or `.agents/`. Initial setup is for clean projects; migration guides are separate.
@@ -36,7 +36,7 @@ The installer is conservative. It refuses to overwrite existing setup paths such
 Verify an installed project:
 
 ```bash
-npx claudex-setup check --mode dual --target /path/to/project
+npx create-claudex check --mode dual --target /path/to/project
 ```
 
 ## Template Modes
@@ -83,7 +83,7 @@ These files are the cross-agent project memory source of truth. Claude native me
 
 ```bash
 cd /path/to/project
-npx claudex-setup init --mode claude
+npm create claudex -- --mode claude
 claude
 ```
 
@@ -100,7 +100,7 @@ Inside Claude Code:
 
 ```bash
 cd /path/to/project
-npx claudex-setup init --mode codex
+npm create claudex -- --mode codex
 codex
 ```
 
@@ -120,7 +120,7 @@ Use the `update-memory-bank` skill to create or refresh `AGENT-*.md` from the cu
 
 ```bash
 cd /path/to/project
-npx claudex-setup init --mode dual
+npm create claudex -- --mode dual
 ```
 
 Claude and Codex then use their own native files while sharing `AGENT-*.md`.

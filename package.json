@@ -1,10 +1,11 @@
 {
-  "name": "claudex-setup",
+  "name": "create-claudex",
   "version": "0.1.0",
-  "description": "Reusable Claude Code and Codex project setup templates.",
+  "description": "Initialize reusable Claude Code and Codex project setup templates.",
   "type": "commonjs",
   "bin": {
-    "claudex-setup": "./bin/claudex-setup.js"
+    "create-claudex": "./bin/claudex-setup.js",
+    "claudex-init": "./bin/claudex-setup.js"
   },
   "files": [
     "bin/",
@@ -22,7 +23,10 @@
     "agent",
     "template"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18"
   }

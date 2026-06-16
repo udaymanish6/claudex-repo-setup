@@ -18,19 +18,22 @@ function usage() {
   return `Claudex Setup
 
 Usage:
-  claudex-setup init --mode <claude|codex|dual> [--target <dir>] [--yes]
-  claudex-setup check [--mode <claude|codex|dual>] [--target <dir>]
+  create-claudex --mode <claude|codex|dual> [--target <dir>] [--yes]
+  create-claudex init --mode <claude|codex|dual> [--target <dir>] [--yes]
+  create-claudex check [--mode <claude|codex|dual>] [--target <dir>]
 
 Examples:
-  claudex-setup init --mode dual --target .
-  claudex-setup init --mode claude --target /path/to/project --yes
-  claudex-setup check --mode dual --target .
+  npm create claudex -- --mode dual
+  npx create-claudex init --mode claude --target /path/to/project --yes
+  npx create-claudex check --mode dual --target .
 `;
 }
 
 function parseArgs(argv) {
-  const args = { command: argv[2], mode: null, target: process.cwd(), yes: false, help: false };
-  for (let i = 3; i < argv.length; i += 1) {
+  const firstArg = argv[2];
+  const hasExplicitCommand = firstArg && !firstArg.startsWith('-');
+  const args = { command: hasExplicitCommand ? firstArg : 'init', mode: null, target: process.cwd(), yes: false, help: false };
+  for (let i = hasExplicitCommand ? 3 : 2; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--help' || arg === '-h') {
       args.help = true;

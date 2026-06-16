@@ -55,6 +55,15 @@ test('init dual installs Claude and Codex files', () => {
   }
 });
 
+test('default command initializes when only mode is provided', () => {
+  const target = tempProject();
+  const result = runCli(['--mode', 'dual', '--target', target, '--yes']);
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.equal(fs.existsSync(path.join(target, 'CLAUDE.md')), true);
+  assert.equal(fs.existsSync(path.join(target, 'AGENTS.md')), true);
+});
+
 test('init refuses to overwrite existing setup files', () => {
   const target = tempProject();
   fs.writeFileSync(path.join(target, 'CLAUDE.md'), 'existing instructions\n');
