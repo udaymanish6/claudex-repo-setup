@@ -1,0 +1,29 @@
+{
+  "name": "claudex-setup",
+  "version": "0.1.0",
+  "description": "Reusable Claude Code and Codex project setup templates.",
+  "type": "commonjs",
+  "bin": {
+    "claudex-setup": "./bin/claudex-setup.js"
+  },
+  "files": [
+    "bin/",
+    "templates/",
+    "migration/",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check": "node --test && node bin/claudex-setup.js check --mode dual --target templates/dual"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "agent",
+    "template"
+  ],
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  }
+}

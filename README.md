@@ -2,6 +2,43 @@
 
 Claudex Setup is a reusable template for Claude Code, Codex, or projects that use both. It keeps each agent's native files separate while sharing one explicit project memory-bank convention.
 
+## Quick Start
+
+Install into a project with npm/npx:
+
+```bash
+cd /path/to/project
+npx claudex-setup init --mode dual
+```
+
+Choose one mode:
+
+```bash
+npx claudex-setup init --mode claude  # CLAUDE.md + .claude/
+npx claudex-setup init --mode codex   # AGENTS.md + .agents/ + .codex/
+npx claudex-setup init --mode dual    # both native setups together
+```
+
+Install somewhere other than the current directory:
+
+```bash
+npx claudex-setup init --mode dual --target /path/to/project
+```
+
+Skip the interactive confirmation for automation:
+
+```bash
+npx claudex-setup init --mode dual --target /path/to/project --yes
+```
+
+The installer is conservative. It refuses to overwrite existing setup paths such as `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.codex/`, or `.agents/`. Initial setup is for clean projects; migration guides are separate.
+
+Verify an installed project:
+
+```bash
+npx claudex-setup check --mode dual --target /path/to/project
+```
+
 ## Template Modes
 
 ```text
@@ -45,8 +82,8 @@ These files are the cross-agent project memory source of truth. Claude native me
 ## Use Claude Only
 
 ```bash
-cp -R templates/claude-only/CLAUDE.md templates/claude-only/.claude /path/to/project/
 cd /path/to/project
+npx claudex-setup init --mode claude
 claude
 ```
 
@@ -62,8 +99,8 @@ Inside Claude Code:
 ## Use Codex Only
 
 ```bash
-cp -R templates/codex-only/AGENTS.md templates/codex-only/.agents templates/codex-only/.codex /path/to/project/
 cd /path/to/project
+npx claudex-setup init --mode codex
 codex
 ```
 
@@ -82,7 +119,8 @@ Use the `update-memory-bank` skill to create or refresh `AGENT-*.md` from the cu
 ## Use Both
 
 ```bash
-cp -R templates/dual/CLAUDE.md templates/dual/AGENTS.md templates/dual/.claude templates/dual/.agents templates/dual/.codex /path/to/project/
+cd /path/to/project
+npx claudex-setup init --mode dual
 ```
 
 Claude and Codex then use their own native files while sharing `AGENT-*.md`.
@@ -113,6 +151,13 @@ Do you want to keep the old agent files for dual-agent use, or remove them now a
 Codex native memories live under `~/.codex/memories/` through `CODEX_HOME`. There is no documented project setting that redirects only native memories into a repo folder. For reusable projects, keep required memory in repo-visible `AGENT-*.md` files.
 
 ## Validation
+
+Package validation:
+
+```bash
+npm test
+npm run check
+```
 
 Template validation:
 
