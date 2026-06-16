@@ -21,8 +21,14 @@
   "keywords": [
     "claude-code",
     "codex",
-    "agent",
-    "template"
+    "agents",
+    "ai-coding",
+    "memory-bank",
+    "developer-tools",
+    "npm-create",
+    "ai-agents",
+    "template",
+    "project-setup"
   ],
   "license": "MIT",
   "publishConfig": {

@@ -1,45 +1,77 @@
 # Claudex Setup
 
-Claudex Setup is a reusable template for Claude Code, Codex, or projects that use both. It keeps each agent's native files separate while sharing one explicit project memory-bank convention.
+> One command to add Claude Code, Codex, or both to any project with a shared repo memory bank.
+
+[![npm package](https://img.shields.io/badge/npm-create--claudex-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/package/create-claudex)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-ready-111827)](https://code.claude.com/)
+[![Codex](https://img.shields.io/badge/Codex-ready-111827)](https://openai.com/codex/)
+
+Claudex Setup is a dependency-free project initializer for AI coding setups. It gives you clean Claude-only, Codex-only, or dual-agent project files without making every new repo start from scratch.
+
+```bash
+npm create claudex -- --mode dual
+```
+
+Use it when you want Claude Code and Codex to keep their native files while sharing one explicit project memory convention.
+
+## Why It Exists
+
+Claude Code uses `CLAUDE.md` and `.claude/`. Codex uses `AGENTS.md`, `.codex/`, and `.agents/`. If you use both, the usual setup drifts fast: one agent learns a rule, the other does not; one hook changes, the other stays stale; memory gets scattered across local machine state.
+
+Claudex solves the boring setup work:
+
+- Native Claude files stay native.
+- Native Codex files stay native.
+- Shared project memory lives in repo-visible `AGENT-*.md` files.
+- The installer refuses to overwrite existing setup files.
+- The same template can start Claude-only, Codex-only, or dual-agent projects.
 
 ## Quick Start
 
-Install into a project with npm/npx:
+Install into the current project:
 
 ```bash
 cd /path/to/project
 npm create claudex -- --mode dual
 ```
 
-Choose one mode:
+Choose the setup mode:
 
 ```bash
 npm create claudex -- --mode claude  # CLAUDE.md + .claude/
 npm create claudex -- --mode codex   # AGENTS.md + .agents/ + .codex/
-npm create claudex -- --mode dual    # both native setups together
+npm create claudex -- --mode dual    # Claude and Codex together
 ```
 
-Install somewhere other than the current directory:
+Install into another folder:
 
 ```bash
 npm create claudex -- --mode dual --target /path/to/project
 ```
 
-Skip the interactive confirmation for automation:
+Skip confirmation in scripts or CI:
 
 ```bash
 npm create claudex -- --mode dual --target /path/to/project --yes
 ```
 
-The installer is conservative. It refuses to overwrite existing setup paths such as `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.codex/`, or `.agents/`. Initial setup is for clean projects; migration guides are separate.
-
-Verify an installed project:
+Verify an installed setup:
 
 ```bash
 npx create-claudex check --mode dual --target /path/to/project
 ```
 
-## Template Modes
+## What Gets Installed
+
+| Mode | Command | Files | Best for |
+|---|---|---|---|
+| Claude only | `npm create claudex -- --mode claude` | `CLAUDE.md`, `.claude/` | Projects using Claude Code only |
+| Codex only | `npm create claudex -- --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | Projects using Codex only |
+| Dual agent | `npm create claudex -- --mode dual` | Claude + Codex files | Projects that want both agents aligned |
+
+Template source folders:
 
 ```text
 templates/claude-only/  # CLAUDE.md + .claude/
@@ -49,6 +81,22 @@ migration/              # one-agent-to-the-other migration guides
 ```
 
 Generated project memory is not shipped in this template. Target projects create it from their real code and state.
+
+## Safety Model
+
+The initializer is intentionally conservative. It refuses to overwrite any of these existing paths:
+
+```text
+CLAUDE.md
+AGENTS.md
+.claude/
+.codex/
+.agents/
+```
+
+`--yes` skips the confirmation prompt. It does not mean force overwrite.
+
+For existing projects that already have agent files, use the migration guides as a manual review path instead of blindly replacing project instructions.
 
 ## Shared Project Memory
 
@@ -62,7 +110,17 @@ AGENT-troubleshooting.md
 AGENT-config-variables.md
 ```
 
-These files are the cross-agent project memory source of truth. Claude native memory and Codex native memories are optional tool-specific recall layers, not the shared repo contract.
+These files are the cross-agent project memory source of truth. Claude native memory and Codex native memories are optional local recall layers; they are not the shared repo contract.
+
+The split is deliberate:
+
+| File | Purpose |
+|---|---|
+| `AGENT-activeContext.md` | Current goal, recent work, blockers, next steps |
+| `AGENT-patterns.md` | Reusable implementation and testing patterns |
+| `AGENT-decisions.md` | Durable architecture and workflow decisions |
+| `AGENT-troubleshooting.md` | Known failures, root causes, fixes, prevention notes |
+| `AGENT-config-variables.md` | Environment variables, config surfaces, safe examples |
 
 ## Claude vs Codex Mapping
 
@@ -95,6 +153,8 @@ Inside Claude Code:
 /memory
 /update-memory-bank
 ```
+
+Claude should initialize project memory from the target project's actual code and state.
 
 ## Use Codex Only
 
@@ -173,6 +233,30 @@ jq empty templates/codex-only/.codex/hooks.json
 jq empty templates/dual/.codex/hooks.json
 git status --short
 ```
+
+## Make The Repo Easier To Discover
+
+For GitHub visibility, use a description that explains the value immediately:
+
+```text
+One-command Claude Code + Codex project setup with shared repo memory.
+```
+
+Recommended GitHub topics:
+
+```text
+claude-code codex agents ai-coding memory-bank developer-tools npm-create ai-agents
+```
+
+Useful launch checklist:
+
+- Publish the npm package as `create-claudex`.
+- Add the GitHub topics above.
+- Pin the repo on your GitHub profile.
+- Add a short terminal GIF or screenshot showing `npm create claudex -- --mode dual`.
+- Post a concise demo to communities where Claude Code and Codex users already are.
+- Lead with the problem: keeping `CLAUDE.md` and `AGENTS.md` aligned across projects.
+- Ask for stars only after showing the one-command setup and safety behavior.
 
 ## Credits
 
