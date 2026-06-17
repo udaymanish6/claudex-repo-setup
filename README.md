@@ -3,6 +3,8 @@
 > Claude Code and Codex project setup that stays native, shared, and hard to drift.
 
 [![npm package](https://img.shields.io/badge/npm-create--claudex-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/package/create-claudex)
+[![GitHub release](https://img.shields.io/github/v/release/udaymanish6/create-claudex?label=release&logo=github)](https://github.com/udaymanish6/create-claudex/releases)
+[![Tests](https://img.shields.io/badge/tests-18%20passing-16a34a)](#verify-the-package)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-ready-111827)](https://code.claude.com/)
@@ -20,6 +22,14 @@ Use it when you want:
 - Codex to keep using `AGENTS.md`, `.codex/`, and `.agents/`.
 - Both agents to share the same repo-visible project memory.
 - Hooks, skills, commands, and agents to start from a sane template instead of drifting by hand.
+
+## See It
+
+![Terminal demo showing Claudex installing a dual Claude and Codex setup](assets/terminal-demo.gif)
+
+![Claudex architecture diagram showing native Claude files, native Codex files, and shared AGENT memory files](assets/architecture.svg)
+
+![Before and after tree showing a project before Claudex and after the generated setup files are added](assets/before-after.svg)
 
 ## Why This Exists
 

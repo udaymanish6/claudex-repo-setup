@@ -11,6 +11,7 @@
     "bin/",
     "templates/",
     "migration/",
+    "assets/",
     "README.md",
     "LICENSE"
   ],
