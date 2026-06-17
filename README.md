@@ -1,6 +1,6 @@
 # Claudex Setup
 
-> One command to add Claude Code, Codex, or both to any project with a shared repo memory bank.
+> Claude Code and Codex project setup that stays native, shared, and hard to drift.
 
 [![npm package](https://img.shields.io/badge/npm-create--claudex-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/package/create-claudex)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -8,99 +8,26 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-ready-111827)](https://code.claude.com/)
 [![Codex](https://img.shields.io/badge/Codex-ready-111827)](https://openai.com/codex/)
 
-Claudex Setup is a dependency-free project initializer for AI coding setups. It gives you clean Claude-only, Codex-only, or dual-agent project files without making every new repo start from scratch.
+Claudex gives any repo a clean AI-agent setup in one command. Use Claude Code, Codex, or both without hand-building instruction files, hooks, skills, agents, and memory rules every time.
 
 ```bash
-npm create claudex -- --mode dual
+npx create-claudex@latest init --mode dual
 ```
 
-Use it when you want Claude Code and Codex to keep their native files while sharing one explicit project memory convention.
+Use it when you want:
 
-## Why It Exists
+- Claude Code to keep using `CLAUDE.md` and `.claude/`.
+- Codex to keep using `AGENTS.md`, `.codex/`, and `.agents/`.
+- Both agents to share the same repo-visible project memory.
+- Hooks, skills, commands, and agents to start from a sane template instead of drifting by hand.
 
-Claude Code uses `CLAUDE.md` and `.claude/`. Codex uses `AGENTS.md`, `.codex/`, and `.agents/`. If you use both, the usual setup drifts fast: one agent learns a rule, the other does not; one hook changes, the other stays stale; memory gets scattered across local machine state.
+## Why This Exists
 
-Claudex solves the boring setup work:
+AI coding tools are useful until each one learns a different version of the project.
 
-- Native Claude files stay native.
-- Native Codex files stay native.
-- Shared project memory lives in repo-visible `AGENT-*.md` files.
-- The installer refuses to overwrite existing setup files.
-- The same template can start Claude-only, Codex-only, or dual-agent projects.
+Claude has one setup shape. Codex has another. If you use both, rules get duplicated, hooks go stale, memory hides in local state, and migrations become messy.
 
-## Quick Start
-
-Install into the current project:
-
-```bash
-cd /path/to/project
-npm create claudex -- --mode dual
-```
-
-Choose the setup mode:
-
-```bash
-npm create claudex -- --mode claude  # CLAUDE.md + .claude/
-npm create claudex -- --mode codex   # AGENTS.md + .agents/ + .codex/
-npm create claudex -- --mode dual    # Claude and Codex together
-```
-
-Install into another folder:
-
-```bash
-npm create claudex -- --mode dual --target /path/to/project
-```
-
-Skip confirmation in scripts or CI:
-
-```bash
-npm create claudex -- --mode dual --target /path/to/project --yes
-```
-
-Verify an installed setup:
-
-```bash
-npx create-claudex check --mode dual --target /path/to/project
-```
-
-## What Gets Installed
-
-| Mode | Command | Files | Best for |
-|---|---|---|---|
-| Claude only | `npm create claudex -- --mode claude` | `CLAUDE.md`, `.claude/` | Projects using Claude Code only |
-| Codex only | `npm create claudex -- --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | Projects using Codex only |
-| Dual agent | `npm create claudex -- --mode dual` | Claude + Codex files | Projects that want both agents aligned |
-
-Template source folders:
-
-```text
-templates/claude-only/  # CLAUDE.md + .claude/
-templates/codex-only/   # AGENTS.md + .agents/ + .codex/
-templates/dual/         # both native setups together
-migration/              # one-agent-to-the-other migration guides
-```
-
-Generated project memory is not shipped in this template. Target projects create it from their real code and state.
-
-## Safety Model
-
-The initializer is intentionally conservative. It refuses to overwrite any of these existing paths:
-
-```text
-CLAUDE.md
-AGENTS.md
-.claude/
-.codex/
-.agents/
-```
-
-`--yes` skips the confirmation prompt. It does not mean force overwrite.
-
-For existing projects that already have agent files, use the migration guides as a manual review path instead of blindly replacing project instructions.
-
-## Shared Project Memory
-
-Both Claude and Codex templates use the same generated memory-bank files:
+Claudex solves that by keeping each tool native while giving them one shared project contract:
 
 ```text
 AGENT-activeContext.md
@@ -110,163 +37,238 @@ AGENT-troubleshooting.md
 AGENT-config-variables.md
 ```
 
-These files are the cross-agent project memory source of truth. Claude native memory and Codex native memories are optional local recall layers; they are not the shared repo contract.
+Those files are generated inside the target project from the target project's real code and state. They are not pre-filled boilerplate.
 
-The split is deliberate:
+## Quick Start
 
-| File | Purpose |
-|---|---|
-| `AGENT-activeContext.md` | Current goal, recent work, blockers, next steps |
-| `AGENT-patterns.md` | Reusable implementation and testing patterns |
-| `AGENT-decisions.md` | Durable architecture and workflow decisions |
-| `AGENT-troubleshooting.md` | Known failures, root causes, fixes, prevention notes |
-| `AGENT-config-variables.md` | Environment variables, config surfaces, safe examples |
-
-## Claude vs Codex Mapping
-
-| Purpose | Claude | Codex |
-|---|---|---|
-| Main instructions | `CLAUDE.md` | `AGENTS.md` |
-| Settings/config | `.claude/settings.json` | `.codex/config.toml` |
-| Hook config | `.claude/settings.json` hooks | `.codex/hooks.json` |
-| Hook scripts | `.claude/hooks/` | `.codex/hooks/` |
-| Skills/workflows | `.claude/skills/` | `.agents/skills/` |
-| Slash commands | `.claude/commands/` | Convert reusable commands to `.agents/skills/` |
-| Subagents | `.claude/agents/*.md` | `.codex/agents/*.toml` |
-| Rules | `.claude/rules/*.md` | `AGENTS.md` plus optional `.codex/rules/*.rules` |
-| MCP | Claude-specific config if needed | `[mcp_servers.*]` in `.codex/config.toml` |
-| Shared memory | `AGENT-*.md` | `AGENT-*.md` |
-
-## Use Claude Only
+Install the dual Claude + Codex setup into the current project:
 
 ```bash
 cd /path/to/project
-npm create claudex -- --mode claude
-claude
+npx create-claudex@latest init --mode dual
 ```
 
-Inside Claude Code:
-
-```text
-/init
-/hooks
-/memory
-/update-memory-bank
-```
-
-Claude should initialize project memory from the target project's actual code and state.
-
-## Use Codex Only
+Check the installed setup:
 
 ```bash
-cd /path/to/project
-npm create claudex -- --mode codex
-codex
+npx create-claudex@latest check --mode dual --target .
 ```
 
-Inside Codex:
-
-```text
-/status
-/hooks
-/skills
-/memories
-/mcp
-```
-
-Use the `update-memory-bank` skill to create or refresh `AGENT-*.md` from the current project.
-
-## Use Both
+Start your agent:
 
 ```bash
-cd /path/to/project
+claude   # for Claude Code
+codex    # for Codex
+```
+
+Then initialize project memory from the real project state:
+
+- In Claude Code: run `/init`, then use `/update-memory-bank` after meaningful work.
+- In Codex: use the `update-memory-bank` skill, or ask Codex to initialize the memory bank.
+
+Prefer `npm create`? This also works, but npm needs the extra separator before package arguments:
+
+```bash
 npm create claudex -- --mode dual
 ```
 
-Claude and Codex then use their own native files while sharing `AGENT-*.md`.
+## Pick A Mode
 
-Keep mirrored behavior aligned:
+| Mode | Command | Installs | Use when |
+|---|---|---|---|
+| Claude only | `npx create-claudex@latest init --mode claude` | `CLAUDE.md`, `.claude/` | The project will use Claude Code only. |
+| Codex only | `npx create-claudex@latest init --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | The project will use Codex only. |
+| Dual agent | `npx create-claudex@latest init --mode dual` | Claude + Codex setup | You want both tools aligned in one repo. |
 
-- If `CLAUDE.md` memory behavior changes, update `AGENTS.md`.
-- If `AGENTS.md` memory behavior changes, update `CLAUDE.md`.
-- If `.claude/hooks/` changes, port equivalent behavior to `.codex/hooks/`.
-- If `.codex/hooks/` changes, port equivalent behavior to `.claude/hooks/`.
-- If a Claude command is reusable in Codex, convert it to a skill under `.agents/skills/`.
-- If a Codex skill changes shared workflow behavior, update the equivalent Claude command or skill.
+Install into another folder:
 
-## Migrate Later
-
-Use `migration/claude-to-codex.md` when a project starts with Claude and later adds Codex.
-
-Use `migration/codex-to-claude.md` when a project starts with Codex and later adds Claude.
-
-Each migration adds the second agent setup and leaves the old setup untouched first. End every migration with a user decision:
-
-```text
-Do you want to keep the old agent files for dual-agent use, or remove them now and make this single-agent only?
+```bash
+npx create-claudex@latest init --mode dual --target /path/to/project
 ```
 
-## Codex Memory Note
+Skip the confirmation prompt in automation:
 
-Codex native memories live under `~/.codex/memories/` through `CODEX_HOME`. There is no documented project setting that redirects only native memories into a repo folder. For reusable projects, keep required memory in repo-visible `AGENT-*.md` files.
+```bash
+npx create-claudex@latest init --mode dual --target /path/to/project --yes
+```
 
-## Validation
+`--yes` does not force overwrite. It only skips the prompt.
 
-Package validation:
+## What Gets Added
+
+```text
+CLAUDE.md                  # Claude Code project instructions
+.claude/                   # Claude settings, hooks, skills, commands, agents, rules
+
+AGENTS.md                  # Codex project instructions
+.agents/skills/            # Repo-local Codex skills
+.codex/                    # Codex config, hooks, agents, rules
+```
+
+The reusable template folders are:
+
+```text
+templates/claude-only/     # Claude-native setup
+templates/codex-only/      # Codex-native setup
+templates/dual/            # Both setups together
+migration/                 # One-agent-to-the-other migration guides
+```
+
+Generated memory files are intentionally not shipped in the template. The target project creates them after the agent inspects real code.
+
+## Native, Not Blended
+
+Claudex does not pretend Claude and Codex are the same tool.
+
+| Purpose | Claude Code | Codex |
+|---|---|---|
+| Main repo instructions | `CLAUDE.md` | `AGENTS.md` |
+| Config | `.claude/settings.json` | `.codex/config.toml` |
+| Hook config | `.claude/settings.json` hooks | `.codex/hooks.json` |
+| Hook scripts | `.claude/hooks/` | `.codex/hooks/` |
+| Skills | `.claude/skills/` | `.agents/skills/` |
+| Slash commands | `.claude/commands/` | Mirrored as Codex skills when portable |
+| Subagents | `.claude/agents/*.md` | `.codex/agents/*.toml` |
+| Shared project memory | `AGENT-*.md` | `AGENT-*.md` |
+
+That is why the raw folder counts are different. Claude has skills plus slash commands. Codex gets the portable command workflows as skills because that is the native reusable workflow surface in this template.
+
+Current dual template shape:
+
+```text
+Claude: 8 skills + reusable slash commands + agents + hooks
+Codex:  21 skills, including mirrored Claude command workflows + agents + hooks
+```
+
+## Included Workflows
+
+Claudex includes a practical starter set instead of only empty instruction files.
+
+Shared concepts:
+
+- Code search and repo exploration.
+- Memory-bank synchronization.
+- UX/design review support.
+- Setup verification.
+- Memory update workflows.
+- Terminal completion notification hooks.
+
+Claude-native additions:
+
+- Claude docs consultant.
+- Consult Codex workflow.
+- Claude slash commands for cleanup, refactor, security, documentation, prompt engineering, architecture, and memory updates.
+- Session metrics and audit helpers.
+
+Codex-native additions:
+
+- Codex docs consultant.
+- Consult Claude workflow.
+- Codex skill mirrors for portable Claude command workflows.
+- Codex hook guard for memory review before stop/compact.
+
+## Shared Memory Bank
+
+The generated `AGENT-*.md` files are the repo-visible memory layer both agents can use.
+
+| File | What it remembers | Read when | Update when |
+|---|---|---|---|
+| `AGENT-activeContext.md` | Current goal, recent work, blockers, next steps | Session start/resume, before finalizing | Meaningful work changes project state |
+| `AGENT-patterns.md` | Reusable implementation, testing, and workflow patterns | Before coding/refactoring | A repeated pattern is found or changed |
+| `AGENT-decisions.md` | Durable technical decisions and tradeoffs | Before design choices | A lasting decision is made or superseded |
+| `AGENT-troubleshooting.md` | Known failures, fixes, commands, prevention notes | During debugging | A problem is diagnosed and fixed |
+| `AGENT-config-variables.md` | Env vars, config, hooks, MCP, safe examples | When touching settings/config/deploy | Config shape or meaning changes |
+
+Claude can also use repo-local native memory under `memory/` when initialized. Codex native memories under `~/.codex/memories/` remain local recall. The shared contract is still `AGENT-*.md`.
+
+## Safety Rules
+
+The initializer is conservative by design.
+
+It refuses to overwrite these existing paths:
+
+```text
+CLAUDE.md
+AGENTS.md
+.claude/
+.codex/
+.agents/
+```
+
+For an existing project, do not blindly replace agent files. Use the migration guides and keep the old setup until you decide what to remove.
+
+## Migration
+
+Started with Claude and want Codex too?
+
+```text
+migration/claude-to-codex.md
+```
+
+Started with Codex and want Claude too?
+
+```text
+migration/codex-to-claude.md
+```
+
+The migration rule is simple:
+
+1. Add the second agent setup in parallel.
+2. Preserve the existing setup first.
+3. Mirror shared memory, hooks, agents, and workflows where useful.
+4. End with a user decision: keep both agents or remove the old one.
+
+## Verify The Package
+
+For maintainers:
 
 ```bash
 npm test
 npm run check
+npm pack --dry-run
 ```
 
-Template validation:
+What the checks cover:
 
-```bash
-jq empty templates/claude-only/.claude/settings.json
-jq empty templates/dual/.claude/settings.json
-python3 -m py_compile templates/claude-only/.claude/hooks/*.py
-python3 -m py_compile templates/dual/.claude/hooks/*.py
-python3 -m py_compile templates/codex-only/.codex/hooks/*.py
-python3 -m py_compile templates/dual/.codex/hooks/*.py
-python3.11 -c 'import tomllib; tomllib.load(open("templates/codex-only/.codex/config.toml","rb")); tomllib.load(open("templates/dual/.codex/config.toml","rb"))'
-jq empty templates/codex-only/.codex/hooks.json
-jq empty templates/dual/.codex/hooks.json
-git status --short
-```
+- CLI usage and version output.
+- Claude-only, Codex-only, and dual installs.
+- Refusal to overwrite existing setup files.
+- Template parity between standalone and dual modes.
+- Codex mirrors for portable Claude workflows.
+- Agent-specific docs consultants.
+- Shared `AGENT-*.md` memory rules.
+- Hook command project-root fallback.
+- No generated memory files shipped in templates.
 
-## Make The Repo Easier To Discover
+Recent smoke coverage also verified:
 
-For GitHub visibility, use a description that explains the value immediately:
+- Packed npm tarball installation into a fresh project.
+- Installed `create-claudex` and `claudex-init` binaries.
+- Generated JSON, TOML, and Python syntax.
+- Codex runtime loading `AGENTS.md`.
+- Codex runtime discovering repo-local `.agents/skills/`.
+- Live Codex `update-memory-bank` skill updating generated `AGENT-*.md` files.
 
-```text
-One-command Claude Code + Codex project setup with shared repo memory.
-```
+Claude CLI was not available in that smoke environment, so Claude runtime launch was not claimed; Claude files and hooks were validated directly.
 
-Recommended GitHub topics:
+## Release Status
 
-```text
-claude-code codex agents ai-coding memory-bank developer-tools npm-create ai-agents
-```
+Current package version: `1.0.1`.
 
-Useful launch checklist:
-
-- Publish the npm package as `create-claudex`.
-- Add the GitHub topics above.
-- Pin the repo on your GitHub profile.
-- Add a short terminal GIF or screenshot showing `npm create claudex -- --mode dual`.
-- Post a concise demo to communities where Claude Code and Codex users already are.
-- Lead with the problem: keeping `CLAUDE.md` and `AGENTS.md` aligned across projects.
-- Ask for stars only after showing the one-command setup and safety behavior.
+This is a patch release because it keeps the same CLI contract while refining the template/docs and preserving restored Claude-Codex parity.
 
 ## Credits
 
-Claudex Setup builds on Claude Code memory-bank ideas from George Liu / Centmin Mod's MIT-licensed [centminmod/my-claude-code-setup](https://github.com/centminmod/my-claude-code-setup), especially the `CLAUDE.md` memory-bank workflow, Template 3 progressive-disclosure direction, companion `.claude/rules/` pattern, and `/init`-driven project memory population.
+Claudex builds on ideas from the Claude Code and Codex communities: repo-local instructions, explicit memory banks, agent skills, hooks, and migration-friendly setup files.
 
-This project repackages and narrows that work into a dependency-free npm initializer with Claude-only, Codex-only, and dual-agent modes, plus the shared `AGENT-*.md` memory-bank contract for projects that use both agents.
+Special thanks to open-source work that helped shape the direction, including:
 
-## Maintenance Rules
+- George Liu / Centmin Mod's Claude Code setup work: https://github.com/centminmod/my-claude-code-setup
+- Peter Steinberger's `agent-scripts`: https://github.com/steipete/agent-scripts
+- OpenClaw agent skills: https://github.com/openclaw/agent-skills
 
-- Keep the repo root as template documentation, not a live project setup.
-- Do not commit generated `AGENT-*.md`, `memory/`, `.codex-home/`, or snapshots of `~/.codex/memories/`.
-- Do not add root `.mcp.json`.
-- Keep Claude files under `.claude/` and Codex files under `.codex/` or `.agents/`.
+This project packages those kinds of workflow ideas into a dependency-free initializer that keeps Claude and Codex native instead of merging them into one brittle format. The Claude memory-bank direction is especially influenced by the Centmin Mod setup's `/init` and project-memory workflow.
+
+## License
+
+MIT

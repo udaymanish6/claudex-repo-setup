@@ -41,7 +41,7 @@
 
 ## Tools
 
-Use `rg` not grep, `fd` not find. `tree` is not installed.
+Prefer `rg` for search. Use `fd` when available, otherwise use `find`.
 
 
 ## Cross-Agent Synchronization
@@ -56,7 +56,7 @@ If this repository also contains Codex setup files (`AGENTS.md`, `.codex/`, or `
 
 ## Rules Dependency
 
-This template requires `.claude/rules/core-rules.md` for behavioral rules. If `.claude/rules/` is missing or empty, alert the user and direct them to https://github.com/centminmod/my-claude-code-setup to obtain the companion rules files.
+This template includes `.claude/rules/core-rules.md` for behavioral rules. If `.claude/rules/` is missing or empty after installation, treat the setup as incomplete and ask the user to reinstall or restore the template files.
 
 ---
 

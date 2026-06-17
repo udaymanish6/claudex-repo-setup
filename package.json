@@ -1,6 +1,6 @@
 {
   "name": "create-claudex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Initialize reusable Claude Code and Codex project setup templates.",
   "type": "commonjs",
   "bin": {
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "test": "node --test",
-    "check": "node --test && node bin/claudex-setup.js check --mode dual --target templates/dual"
+    "check": "node --test && node bin/claudex-setup.js check --mode claude --target templates/claude-only && node bin/claudex-setup.js check --mode codex --target templates/codex-only && node bin/claudex-setup.js check --mode dual --target templates/dual"
   },
   "keywords": [
     "claude-code",

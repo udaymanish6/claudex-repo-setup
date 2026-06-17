@@ -40,7 +40,7 @@
 
 ## Tools
 
-Use `rg` not grep, `fd` not find. `tree` is not installed.
+Prefer `rg` for search. Use `fd` when available, otherwise use `find`.
 
 
 ## Cross-Agent Synchronization
