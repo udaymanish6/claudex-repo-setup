@@ -1,6 +1,6 @@
 {
   "name": "create-claudex",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Initialize reusable Claude Code and Codex project setup templates.",
   "type": "commonjs",
   "bin": {

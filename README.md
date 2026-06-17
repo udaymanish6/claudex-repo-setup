@@ -253,21 +253,19 @@ Claude CLI was not available in that smoke environment, so Claude runtime launch
 
 ## Release Status
 
-Current package version: `1.0.1`.
+Current package version: `1.0.0`.
 
-This is a patch release because it keeps the same CLI contract while refining the template/docs and preserving restored Claude-Codex parity.
+This is the initial public release of the clean Claude Code + Codex setup template.
 
 ## Credits
 
 Claudex builds on ideas from the Claude Code and Codex communities: repo-local instructions, explicit memory banks, agent skills, hooks, and migration-friendly setup files.
 
-Special thanks to open-source work that helped shape the direction, including:
+Special thanks to George Liu / Centmin Mod's Claude Code setup work:
 
-- George Liu / Centmin Mod's Claude Code setup work: https://github.com/centminmod/my-claude-code-setup
-- Peter Steinberger's `agent-scripts`: https://github.com/steipete/agent-scripts
-- OpenClaw agent skills: https://github.com/openclaw/agent-skills
+- https://github.com/centminmod/my-claude-code-setup
 
-This project packages those kinds of workflow ideas into a dependency-free initializer that keeps Claude and Codex native instead of merging them into one brittle format. The Claude memory-bank direction is especially influenced by the Centmin Mod setup's `/init` and project-memory workflow.
+The Claude memory-bank direction is especially influenced by the Centmin Mod setup's `/init` and project-memory workflow. Claudex packages that direction into a dependency-free initializer that keeps Claude and Codex native instead of merging them into one brittle format.
 
 ## License
 
