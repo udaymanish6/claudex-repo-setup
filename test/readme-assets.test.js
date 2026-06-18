@@ -11,7 +11,7 @@ function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
 }
 
-test('README links visual assets and release badges', () => {
+test('README links visual assets and GitHub release install', () => {
   const readme = read('README.md');
   for (const rel of [
     'assets/terminal-demo.gif',
@@ -22,10 +22,15 @@ test('README links visual assets and release badges', () => {
     assert.equal(fs.existsSync(path.join(ROOT, rel)), true, rel + ' should exist');
   }
   assert.match(readme, /github\/v\/release\/udaymanish6\/create-claudex/);
+  assert.match(readme, /install-GitHub_release/);
+  assert.match(readme, /github:udaymanish6\/create-claudex#v1\.0\.1/);
+  assert.doesNotMatch(readme, new RegExp('create-claudex' + '@latest'));
+  assert.doesNotMatch(readme, new RegExp('npm create ' + 'claudex'));
+  assert.doesNotMatch(readme, /www\.npmjs\.com\/package\/create-claudex/);
   assert.match(readme, /tests-18%20passing/);
 });
 
-test('npm package includes README assets', () => {
+test('package tarball includes README assets', () => {
   const packageJson = require('../package.json');
   assert.equal(packageJson.files.includes('assets/'), true);
 });

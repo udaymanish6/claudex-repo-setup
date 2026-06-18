@@ -2,7 +2,7 @@
 
 > Claude Code and Codex project setup that stays native, shared, and hard to drift.
 
-[![npm package](https://img.shields.io/badge/npm-create--claudex-CB3837?logo=npm&logoColor=white)](https://www.npmjs.com/package/create-claudex)
+[![Install from GitHub](https://img.shields.io/badge/install-GitHub_release-181717?logo=github)](https://github.com/udaymanish6/create-claudex/releases/tag/v1.0.1)
 [![GitHub release](https://img.shields.io/github/v/release/udaymanish6/create-claudex?label=release&logo=github)](https://github.com/udaymanish6/create-claudex/releases)
 [![Tests](https://img.shields.io/badge/tests-18%20passing-16a34a)](#verify-the-package)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -13,7 +13,7 @@
 Claudex gives any repo a clean AI-agent setup in one command. Use Claude Code, Codex, or both without hand-building instruction files, hooks, skills, agents, and memory rules every time.
 
 ```bash
-npx create-claudex@latest init --mode dual
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode dual
 ```
 
 Use it when you want:
@@ -55,13 +55,13 @@ Install the dual Claude + Codex setup into the current project:
 
 ```bash
 cd /path/to/project
-npx create-claudex@latest init --mode dual
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode dual
 ```
 
 Check the installed setup:
 
 ```bash
-npx create-claudex@latest check --mode dual --target .
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex check --mode dual --target .
 ```
 
 Start your agent:
@@ -76,30 +76,26 @@ Then initialize project memory from the real project state:
 - In Claude Code: run `/init`, then use `/update-memory-bank` after meaningful work.
 - In Codex: use the `update-memory-bank` skill, or ask Codex to initialize the memory bank.
 
-Prefer `npm create`? This also works, but npm needs the extra separator before package arguments:
-
-```bash
-npm create claudex -- --mode dual
-```
+Claudex is currently installed from the GitHub release tag. The npm registry package is not published yet.
 
 ## Pick A Mode
 
-| Mode | Command | Installs | Use when |
+| Mode | GitHub release command | Installs | Use when |
 |---|---|---|---|
-| Claude only | `npx create-claudex@latest init --mode claude` | `CLAUDE.md`, `.claude/` | The project will use Claude Code only. |
-| Codex only | `npx create-claudex@latest init --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | The project will use Codex only. |
-| Dual agent | `npx create-claudex@latest init --mode dual` | Claude + Codex setup | You want both tools aligned in one repo. |
+| Claude only | `npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode claude` | `CLAUDE.md`, `.claude/` | The project will use Claude Code only. |
+| Codex only | `npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | The project will use Codex only. |
+| Dual agent | `npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode dual` | Claude + Codex setup | You want both tools aligned in one repo. |
 
 Install into another folder:
 
 ```bash
-npx create-claudex@latest init --mode dual --target /path/to/project
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode dual --target /path/to/project
 ```
 
 Skip the confirmation prompt in automation:
 
 ```bash
-npx create-claudex@latest init --mode dual --target /path/to/project --yes
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex init --mode dual --target /path/to/project --yes
 ```
 
 `--yes` does not force overwrite. It only skips the prompt.
@@ -252,7 +248,7 @@ What the checks cover:
 
 Recent smoke coverage also verified:
 
-- Packed npm tarball installation into a fresh project.
+- Packed local package tarball installation into a fresh project.
 - Installed `create-claudex` and `claudex-init` binaries.
 - Generated JSON, TOML, and Python syntax.
 - Codex runtime loading `AGENTS.md`.
@@ -263,9 +259,13 @@ Claude CLI was not available in that smoke environment, so Claude runtime launch
 
 ## Release Status
 
-Current package version: `1.0.0`.
+Current GitHub release: `v1.0.1`.
 
-This is the initial public release of the clean Claude Code + Codex setup template.
+This is the initial public release of the clean Claude Code + Codex setup template. Until the npm registry package is published, install through the GitHub release tag:
+
+```bash
+npm exec --yes --package "github:udaymanish6/create-claudex#v1.0.1" -- create-claudex --help
+```
 
 ## Credits
 

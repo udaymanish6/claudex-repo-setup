@@ -8,6 +8,7 @@ const readline = require('readline');
 const ROOT = path.resolve(__dirname, '..');
 const TEMPLATE_DIR = path.join(ROOT, 'templates');
 const PACKAGE = require(path.join(ROOT, 'package.json'));
+const GITHUB_RELEASE_PACKAGE = `github:udaymanish6/create-claudex#v${PACKAGE.version}`;
 const MODES = new Set(['claude', 'codex', 'dual']);
 const MODE_TO_TEMPLATE = {
   claude: 'claude-only',
@@ -25,9 +26,9 @@ Usage:
   create-claudex --version
 
 Examples:
-  npm create claudex -- --mode dual
-  npx create-claudex init --mode claude --target /path/to/project --yes
-  npx create-claudex check --mode dual --target .
+  npm exec --yes --package "${GITHUB_RELEASE_PACKAGE}" -- create-claudex init --mode dual
+  npm exec --yes --package "${GITHUB_RELEASE_PACKAGE}" -- create-claudex init --mode claude --target /path/to/project --yes
+  npm exec --yes --package "${GITHUB_RELEASE_PACKAGE}" -- create-claudex check --mode dual --target .
 `;
 }
 
