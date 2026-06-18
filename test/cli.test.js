@@ -27,7 +27,7 @@ test('prints usage when no arguments are provided', () => {
 
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /Usage:/);
-  assert.match(result.stdout, /github:udaymanish6\/create-claudex#v/);
+  assert.match(result.stdout, /github:udaymanish6\/claudex-repo-setup#v/);
   assert.doesNotMatch(result.stdout, new RegExp('npm create ' + 'claudex'));
   assert.doesNotMatch(result.stdout, new RegExp('npx create-' + 'claudex'));
 });

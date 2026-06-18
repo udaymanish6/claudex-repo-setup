@@ -8,7 +8,7 @@ const readline = require('readline');
 const ROOT = path.resolve(__dirname, '..');
 const TEMPLATE_DIR = path.join(ROOT, 'templates');
 const PACKAGE = require(path.join(ROOT, 'package.json'));
-const GITHUB_RELEASE_PACKAGE = `github:udaymanish6/create-claudex#v${PACKAGE.version}`;
+const GITHUB_RELEASE_PACKAGE = `github:udaymanish6/claudex-repo-setup#v${PACKAGE.version}`;
 const MODES = new Set(['claude', 'codex', 'dual']);
 const MODE_TO_TEMPLATE = {
   claude: 'claude-only',

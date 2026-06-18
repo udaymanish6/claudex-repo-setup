@@ -21,9 +21,9 @@ test('README links visual assets and GitHub release install', () => {
     assert.equal(readme.includes(rel), true, rel + ' should be linked from README');
     assert.equal(fs.existsSync(path.join(ROOT, rel)), true, rel + ' should exist');
   }
-  assert.match(readme, /github\/v\/release\/udaymanish6\/create-claudex/);
+  assert.match(readme, /github\/v\/release\/udaymanish6\/claudex-repo-setup/);
   assert.match(readme, /install-GitHub_release/);
-  assert.match(readme, /github:udaymanish6\/create-claudex#v1\.0\.1/);
+  assert.match(readme, /github:udaymanish6\/claudex-repo-setup#v1\.0\.2/);
   assert.doesNotMatch(readme, new RegExp('create-claudex' + '@latest'));
   assert.doesNotMatch(readme, new RegExp('npm create ' + 'claudex'));
   assert.doesNotMatch(readme, /www\.npmjs\.com\/package\/create-claudex/);
