@@ -23,7 +23,7 @@ test('README links visual assets and GitHub release install', () => {
   }
   assert.match(readme, /github\/v\/release\/udaymanish6\/claudex-repo-setup/);
   assert.match(readme, /install-GitHub_release/);
-  assert.match(readme, /github:udaymanish6\/claudex-repo-setup#v1\.0\.2/);
+  assert.match(readme, /https:\/\/github\.com\/udaymanish6\/claudex-repo-setup\/archive\/refs\/tags\/v1\.0\.3\.tar\.gz/);
   assert.doesNotMatch(readme, new RegExp('create-claudex' + '@latest'));
   assert.doesNotMatch(readme, new RegExp('npm create ' + 'claudex'));
   assert.doesNotMatch(readme, /www\.npmjs\.com\/package\/create-claudex/);

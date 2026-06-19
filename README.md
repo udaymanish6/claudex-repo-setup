@@ -2,7 +2,7 @@
 
 > Claude Code and Codex project setup that stays native, shared, and hard to drift.
 
-[![Install from GitHub](https://img.shields.io/badge/install-GitHub_release-181717?logo=github)](https://github.com/udaymanish6/claudex-repo-setup/releases/tag/v1.0.2)
+[![Install from GitHub](https://img.shields.io/badge/install-GitHub_release-181717?logo=github)](https://github.com/udaymanish6/claudex-repo-setup/releases/tag/v1.0.3)
 [![GitHub release](https://img.shields.io/github/v/release/udaymanish6/claudex-repo-setup?label=release&logo=github)](https://github.com/udaymanish6/claudex-repo-setup/releases)
 [![Tests](https://img.shields.io/badge/tests-18%20passing-16a34a)](#verify-the-package)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -13,7 +13,7 @@
 Claudex gives any repo a clean AI-agent setup in one command. Use Claude Code, Codex, or both without hand-building instruction files, hooks, skills, agents, and memory rules every time.
 
 ```bash
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode dual
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode dual
 ```
 
 Use it when you want:
@@ -55,13 +55,13 @@ Install the dual Claude + Codex setup into the current project:
 
 ```bash
 cd /path/to/project
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode dual
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode dual
 ```
 
 Check the installed setup:
 
 ```bash
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex check --mode dual --target .
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex check --mode dual --target .
 ```
 
 Start your agent:
@@ -76,26 +76,26 @@ Then initialize project memory from the real project state:
 - In Claude Code: run `/init`, then use `/update-memory-bank` after meaningful work.
 - In Codex: use the `update-memory-bank` skill, or ask Codex to initialize the memory bank.
 
-Claudex is currently installed from the GitHub release tag. The npm registry package is not published yet.
+Claudex is currently installed from the GitHub release tarball. The npm registry package is not published yet.
 
 ## Pick A Mode
 
 | Mode | GitHub release command | Installs | Use when |
 |---|---|---|---|
-| Claude only | `npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode claude` | `CLAUDE.md`, `.claude/` | The project will use Claude Code only. |
-| Codex only | `npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | The project will use Codex only. |
-| Dual agent | `npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode dual` | Claude + Codex setup | You want both tools aligned in one repo. |
+| Claude only | `npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode claude` | `CLAUDE.md`, `.claude/` | The project will use Claude Code only. |
+| Codex only | `npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode codex` | `AGENTS.md`, `.agents/`, `.codex/` | The project will use Codex only. |
+| Dual agent | `npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode dual` | Claude + Codex setup | You want both tools aligned in one repo. |
 
 Install into another folder:
 
 ```bash
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode dual --target /path/to/project
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode dual --target /path/to/project
 ```
 
 Skip the confirmation prompt in automation:
 
 ```bash
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex init --mode dual --target /path/to/project --yes
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex init --mode dual --target /path/to/project --yes
 ```
 
 `--yes` does not force overwrite. It only skips the prompt.
@@ -259,12 +259,12 @@ Claude CLI was not available in that smoke environment, so Claude runtime launch
 
 ## Release Status
 
-Current GitHub release: `v1.0.2`.
+Current GitHub release: `v1.0.3`.
 
-This is the initial public release of the clean Claude Code + Codex setup template. Until the npm registry package is published, install through the GitHub release tag:
+This is the initial public release of the clean Claude Code + Codex setup template. Until the npm registry package is published, install through the GitHub release tarball:
 
 ```bash
-npm exec --yes --package "github:udaymanish6/claudex-repo-setup#v1.0.2" -- create-claudex --help
+npm exec --yes --package "https://github.com/udaymanish6/claudex-repo-setup/archive/refs/tags/v1.0.3.tar.gz" -- create-claudex --help
 ```
 
 ## Credits
